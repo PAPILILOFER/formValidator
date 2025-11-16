@@ -7,13 +7,14 @@ export class MysqlConnection {
   static createConnection(configService: ConfigService): DataSourceOptions {
     return {
       type: 'mysql',
+      name: 'mysql',
       host: configService.get<string>('DB_HOST'),
       port: configService.get<number>('DB_PORT'),
       username: configService.get<string>('DB_USER'),
       password: configService.get<string>('DB_PASSWORD'),
       database: configService.get<string>('DB_NAME'),
-      entities: [...rootEntities], 
-      synchronize: true, 
+      entities: [...rootEntities],
+      synchronize: true,
       migrations: [],
       namingStrategy: new SnakeNamingStrategy(),
       logging: ['error', 'warn'],
