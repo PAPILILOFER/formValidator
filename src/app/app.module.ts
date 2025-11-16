@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from 'src/context/auth/infrastructure/auth.module';
 import { MysqlConnection } from 'src/context/shared/Connection';
 
 @Module({
   imports: [
-    // Variables de entorno (.env)
+    // (.env)
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
@@ -17,7 +18,9 @@ import { MysqlConnection } from 'src/context/shared/Connection';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) =>
         MysqlConnection.createConnection(configService),
+      name: 'mysql',
     }),
+    AuthModule,
   ],
 })
 export class AppModule {}
