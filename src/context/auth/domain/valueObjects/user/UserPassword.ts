@@ -25,5 +25,12 @@ export class UserPassword extends StringValueObject {
         'La contraseña debe contener al menos un número.',
       );
     }
+
+    if (!/[!@#$%^&*(),.?":{}|<>_\-+=\[\]\\\/]/.test(value)) {
+      throw new InvalidArgumentError(
+        'La contraseña debe contener al menos un carácter especial.',
+      );
+    }
+    
   }
 }
